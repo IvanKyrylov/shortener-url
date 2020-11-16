@@ -25,6 +25,7 @@ func New(prefix string, store store.Service) http.Handler {
 	mux.HandleFunc("/shortener/", responseHandler(h.shortener))
 	mux.HandleFunc("/", h.redirect)
 	// mux.HandleFunc("/", cached("60s", h.redirect))
+	mux.HandleFunc("/info/", responseHandler(h.info))
 	return mux
 }
 
@@ -65,9 +66,24 @@ func (h handler) redirect(w http.ResponseWriter, r *http.Request) {
 	url, err := h.store.Load(code)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("URL Not Found"))
+		w.Write([]byte("Url Not Found"))
 		return
 	}
 
 	http.Redirect(w, r, string(url), http.StatusFound)
+}
+
+func (h handler) info(w http.ResponseWriter, r *http.Request) (interface{}, int, error) {
+	if r.Method != http.MethodGet {
+		return nil, http.StatusMethodNotAllowed, fmt.Errorf("Method %s not allowed", r.Method)
+	}
+
+	code := r.URL.Path[len("/info/"):]
+
+	model, err := h.store.LoadInfo(code)
+	if err != nil {
+		return nil, http.StatusNotFound, fmt.Errorf("Url not found")
+	}
+
+	return model, http.StatusOK, nil
 }
