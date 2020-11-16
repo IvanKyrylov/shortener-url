@@ -1,5 +1,6 @@
 # Create URL shortener server
 Implement an HTTP server that can generate shortened URLs.
+
 1.Ability to create new shortened URLs using API request.
 
 2.The requests to shortened URLs should be redirected to their original URL (status 302) or return 404 for unknown URLs.
