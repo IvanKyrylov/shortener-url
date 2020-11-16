@@ -8,7 +8,7 @@ import (
 type Config struct {
 	Server struct {
 		Host string `json:"host"`
-		Port string `json:"password"`
+		Port string `json:"port"`
 	} `json:"server"`
 	Postgres struct {
 		Host     string `json:"host"`
@@ -17,7 +17,7 @@ type Config struct {
 		Password string `json:"password"`
 		Db       string `json:"db"`
 	} `json:"postgres"`
-	Optional struct {
+	Options struct {
 		Prefix string `json:"prefix"`
 	} `json:"options"`
 }

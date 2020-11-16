@@ -3,7 +3,7 @@
         "host" : "0.0.0.0",
         "port" : "8080"
     },
-    "options" : {
+    "Options" : {
         "prefix" : "http://localhost:8080/"
     },
     "postgres" : {
@@ -11,6 +11,6 @@
         "port" : "5432",
         "user" : "postgres",
         "password" : "root",
-        "db" : "shortener_db"
+        "db" : "shortener"
     }
 }
